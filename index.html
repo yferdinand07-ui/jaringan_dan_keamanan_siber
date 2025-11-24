@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keamanan Siber - Media Pembelajaran Interaktif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f3d3e 0%, #1a5f4e 100%);
+            padding: 30px 0;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            text-align: center;
+            color: #00ff88;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .header-info {
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 0.9em;
+        }
+
+        nav {
+            background: rgba(15, 61, 62, 0.5);
+            padding: 15px 0;
+            margin-top: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav button {
+            background: linear-gradient(135deg, #1a5f4e 0%, #0f3d3e 100%);
+            color: #00ff88;
+            border: 2px solid #00ff88;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        nav button:hover {
+            background: #00ff88;
+            color: #0a0e27;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        nav button.active {
+            background: #00ff88;
+            color: #0a0e27;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            margin-top: 30px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(26, 95, 78, 0.2) 0%, rgba(15, 61, 62, 0.2) 100%);
+            border: 2px solid #1a5f4e;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .card h2 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .card h3 {
+            color: #00ff88;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        .cia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .cia-item {
+            background: rgba(0, 255, 136, 0.05);
+            border: 2px solid #1a5f4e;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cia-item:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+            transform: scale(1.05);
+        }
+
+        .cia-item h4 {
+            color: #00ff88;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .roadmap {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .roadmap-item {
+            position: relative;
+            padding: 20px;
+            margin: 20px 0;
+            background: rgba(26, 95, 78, 0.1);
+            border-left: 4px solid #00ff88;
+            border-radius: 8px;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .simulator {
+            background: rgba(0, 255, 136, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(15, 61, 62, 0.3);
+            border: 2px solid #1a5f4e;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        button {
+            background: linear-gradient(135deg, #1a5f4e 0%, #0f3d3e 100%);
+            color: #00ff88;
+            border: 2px solid #00ff88;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #00ff88;
+            color: #0a0e27;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .quiz-question {
+            background: rgba(26, 95, 78, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #1a5f4e;
+        }
+
+        .quiz-options {
+            margin: 15px 0;
+        }
+
+        .quiz-option {
+            background: rgba(15, 61, 62, 0.3);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.15);
+        }
+
+        .quiz-option.correct {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.2);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ff4444;
+            background: rgba(255, 68, 68, 0.2);
+        }
+
+        .result {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #00ff88;
+        }
+
+        .password-strength {
+            height: 10px;
+            background: #1a1a2e;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .strength-weak {
+            width: 33%;
+            background: #ff4444;
+        }
+
+        .strength-medium {
+            width: 66%;
+            background: #ffaa00;
+        }
+
+        .strength-strong {
+            width: 100%;
+            background: #00ff88;
+        }
+
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .glossary-item {
+            background: rgba(26, 95, 78, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #1a5f4e;
+            transition: all 0.3s ease;
+        }
+
+        .glossary-item:hover {
+            border-color: #00ff88;
+            transform: translateY(-3px);
+        }
+
+        .glossary-term {
+            color: #00ff88;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 2px solid #1a5f4e;
+            color: #a0a0a0;
+        }
+
+        .highlight {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .code-example {
+            background: #0a0e27;
+            border: 2px solid #1a5f4e;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .example-card {
+            background: rgba(26, 95, 78, 0.1);
+            border: 2px solid #1a5f4e;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            border-color: #00ff88;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cia-grid, .glossary-grid, .example-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔐 Keamanan Siber</h1>
+            <div class="header-info">
+                <p>Media Pembelajaran Interaktif - Jaringan dan Keamanan Digital</p>
+                <p><strong>Nama:</strong> Yoel Ferdinand Stam | <strong>Kelas:</strong> XIIC | <strong>Absen:</strong> 26</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul>
+                <li><button onclick="showSection('pengenalan')" class="active">📚 Pengenalan</button></li>
+                <li><button onclick="showSection('belajar')">🎓 Cara Belajar</button></li>
+                <li><button onclick="showSection('contoh')">💡 Contoh</button></li>
+                <li><button onclick="showSection('simulator')">🔧 Simulator Enkripsi</button></li>
+                <li><button onclick="showSection('password')">🔑 Password Checker</button></li>
+                <li><button onclick="showSection('glossary')">📖 Glossary</button></li>
+                <li><button onclick="showSection('quiz')">✅ Quiz</button></li>
+            </ul>
+        </nav>
+
+        <!-- Pengenalan Materi -->
+        <div id="pengenalan" class="section active">
+            <div class="card">
+                <h2>🛡 Pengenalan Keamanan Siber</h2>
+                <p><strong>Keamanan Siber</strong> adalah praktik melindungi sistem komputer, jaringan, dan data dari serangan digital, akses tidak sah, atau kerusakan. Di era digital ini, keamanan siber sangat penting untuk melindungi informasi pribadi dan bisnis.</p>
+
+                <h3>🔺 Prinsip CIA (CIA Triad)</h3>
+                <p>CIA Triad adalah tiga pilar utama dalam keamanan informasi:</p>
+
+                <div class="cia-grid">
+                    <div class="cia-item">
+                        <h4>🔒 Confidentiality</h4>
+                        <p><strong>Kerahasiaan</strong></p>
+                        <p>Memastikan informasi hanya dapat diakses oleh pihak yang berwenang. Melindungi data dari akses tidak sah.</p>
+                        <p><em>Contoh:</em> Enkripsi data, password, kontrol akses</p>
+                    </div>
+
+                    <div class="cia-item">
+                        <h4>✅ Integrity</h4>
+                        <p><strong>Integritas</strong></p>
+                        <p>Menjaga data tetap akurat, konsisten, dan tidak dimodifikasi tanpa izin selama penyimpanan atau transmisi.</p>
+                        <p><em>Contoh:</em> Hash function, digital signature, checksum</p>
+                    </div>
+
+                    <div class="cia-item">
+                        <h4>🌐 Availability</h4>
+                        <p><strong>Ketersediaan</strong></p>
+                        <p>Memastikan sistem dan data dapat diakses oleh pengguna yang berwenang saat dibutuhkan.</p>
+                        <p><em>Contoh:</em> Backup sistem, redundansi server, proteksi DDoS</p>
+                    </div>
+                </div>
+
+                <h3>🔐 Enkripsi Dasar</h3>
+                <p><strong>Enkripsi</strong> adalah proses mengubah informasi (plaintext) menjadi bentuk yang tidak dapat dibaca (ciphertext) menggunakan algoritma dan kunci tertentu.</p>
+
+                <div class="example-grid">
+                    <div class="example-card">
+                        <h4>Enkripsi Simetris</h4>
+                        <p>Menggunakan <span class="highlight">satu kunci</span> yang sama untuk enkripsi dan dekripsi.</p>
+                        <p><strong>Contoh:</strong> AES, DES, 3DES</p>
+                        <p><strong>Kelebihan:</strong> Cepat dan efisien</p>
+                        <p><strong>Kekurangan:</strong> Distribusi kunci yang aman</p>
+                    </div>
+
+                    <div class="example-card">
+                        <h4>Enkripsi Asimetris</h4>
+                        <p>Menggunakan <span class="highlight">sepasang kunci</span>: public key dan private key.</p>
+                        <p><strong>Contoh:</strong> RSA, ECC, DSA</p>
+                        <p><strong>Kelebihan:</strong> Distribusi kunci lebih aman</p>
+                        <p><strong>Kekurangan:</strong> Lebih lambat dari simetris</p>
+                    </div>
+                </div>
+
+                <h3>⚠ Ancaman Keamanan Siber</h3>
+                <ul style="padding-left: 20px; margin-top: 15px;">
+                    <li><strong>Malware:</strong> Virus, worm, trojan, ransomware</li>
+                    <li><strong>Phishing:</strong> Penipuan untuk mencuri informasi sensitif</li>
+                    <li><strong>Man-in-the-Middle:</strong> Intersepsi komunikasi</li>
+                    <li><strong>DDoS Attack:</strong> Serangan untuk membuat layanan tidak tersedia</li>
+                    <li><strong>SQL Injection:</strong> Serangan pada database</li>
+                    <li><strong>Zero-Day Exploit:</strong> Serangan pada kerentanan yang belum diketahui</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Cara Belajar -->
+        <div id="belajar" class="section">
+            <div class="card">
+                <h2>🎓 Roadmap Belajar Cyber Security</h2>
+                <p>Berikut adalah langkah-langkah sistematis untuk mempelajari keamanan siber dari dasar hingga mahir:</p>
+
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <h3>1. Fundamental IT & Networking</h3>
+                        <p><strong>Waktu:</strong> 2-3 bulan</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Dasar-dasar komputer dan sistem operasi (Windows, Linux)</li>
+                            <li>Jaringan komputer (TCP/IP, DNS, HTTP/HTTPS)</li>
+                            <li>Command line (CMD, PowerShell, Bash)</li>
+                            <li>Virtual machines (VirtualBox, VMware)</li>
+                        </ul>
+                        <p><strong>Resources:</strong> CompTIA A+, Network+</p>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <h3>2. Security Fundamentals</h3>
+                        <p><strong>Waktu:</strong> 2-3 bulan</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>CIA Triad dan prinsip keamanan</li>
+                            <li>Kriptografi dasar (enkripsi, hashing)</li>
+                            <li>Autentikasi dan otorisasi</li>
+                            <li>Firewall dan IDS/IPS</li>
+                            <li>Security policies dan best practices</li>
+                        </ul>
+                        <p><strong>Resources:</strong> CompTIA Security+, Cybrary</p>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <h3>3. Ethical Hacking & Penetration Testing</h3>
+                        <p><strong>Waktu:</strong> 4-6 bulan</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Reconnaissance dan information gathering</li>
+                            <li>Vulnerability scanning (Nmap, Nessus)</li>
+                            <li>Exploitation techniques</li>
+                            <li>Web application security (OWASP Top 10)</li>
+                            <li>Wireless security</li>
+                        </ul>
+                        <p><strong>Resources:</strong> CEH, OSCP, HackTheBox, TryHackMe</p>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <h3>4. Specialized Skills</h3>
+                        <p><strong>Waktu:</strong> Ongoing</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Incident response dan forensics</li>
+                            <li>Malware analysis</li>
+                            <li>Cloud security (AWS, Azure)</li>
+                            <li>Mobile security</li>
+                            <li>IoT security</li>
+                        </ul>
+                        <p><strong>Resources:</strong> GIAC, CISSP (advanced)</p>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <h3>5. Continuous Learning</h3>
+                        <p><strong>Waktu:</strong> Selamanya</p>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>Ikuti blog dan podcast keamanan</li>
+                            <li>Praktik di lab (VulnHub, DVWA)</li>
+                            <li>Ikuti CTF competitions</li>
+                            <li>Baca security advisories</li>
+                            <li>Networking dengan komunitas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📚 Platform Belajar Online</h3>
+                <div class="example-grid">
+                    <div class="example-card">
+                        <h4>TryHackMe</h4>
+                        <p>Platform interaktif dengan labs hands-on untuk pemula hingga advanced.</p>
+                        <p><span class="highlight">tryhackme.com</span></p>
+                    </div>
+                    <div class="example-card">
+                        <h4>HackTheBox</h4>
+                        <p>Platform penetration testing dengan mesin virtual untuk praktek hacking.</p>
+                        <p><span class="highlight">hackthebox.com</span></p>
+                    </div>
+                    <div class="example-card">
+                        <h4>Cybrary</h4>
+                        <p>Kursus gratis tentang berbagai topik cyber security.</p>
+                        <p><span class="highlight">cybrary.it</span></p>
+                    </div>
+                    <div class="example-card">
+                        <h4>OWASP</h4>
+                        <p>Resources tentang web application security.</p>
+                        <p><span class="highlight">owasp.org</span></p>
+                    </div>
+                </div>
+
+                <h3>🛠 Tools Yang Harus Dikuasai</h3>
+                <ul style="padding-left: 20px; margin-top: 15px;">
+                    <li><strong>Nmap:</strong> Network scanning dan discovery</li>
+                    <li><strong>Wireshark:</strong> Network protocol analyzer</li>
+                    <li><strong>Metasploit:</strong> Penetration testing framework</li>
+                    <li><strong>Burp Suite:</strong> Web application security testing</li>
+                    <li><strong>John the Ripper:</strong> Password cracking</li>
+                    <li><strong>Aircrack-ng:</strong> Wireless security auditing</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contoh -->
+        <div id="contoh" class="section">
+            <div class="card">
+                <h2>💡 Contoh Penerapan Keamanan Siber</h2>
+
+                <h3>1. Contoh Enkripsi Caesar Cipher</h3>
+                <p>Caesar Cipher adalah metode enkripsi sederhana yang menggeser setiap huruf dalam teks dengan jumlah posisi tertentu dalam alfabet.</p>
+                
+                <div class="code-example">
+                    <p><strong>Plaintext:</strong> HELLO WORLD</p>
+                    <p><strong>Shift:</strong> 3 posisi</p>
+                    <p><strong>Ciphertext:</strong> KHOOR ZRUOG</p>
+                    <br>
+                    <p>Proses:</p>
+                    <p>H → K (H+3)</p>
+                    <p>E → H (E+3)</p>
+                    <p>L → O (L+3)</p>
+                    <p>L → O (L+3)</p>
+                    <p>O → R (O+3)</p>
+                </div>
+
+                <h3>2. Contoh Password Hashing</h3>
+                <p>Hashing mengubah password menjadi string acak yang tidak dapat dikembalikan (one-way function).</p>
+                
+                <div class="code-example">
+                    <p><strong>Password:</strong> MySecurePass123</p>
+                    <p><strong>MD5 Hash:</strong> 3c9909afec25354d551dae21590bb26e</p>
+                    <p><strong>SHA-256 Hash:</strong> 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92</p>
+                    <br>
+                    <p>💡 <em>Catatan: MD5 sudah tidak aman, gunakan SHA-256 atau bcrypt</em></p>
+                </div>
+
+                <h3>3. Contoh HTTPS vs HTTP</h3>
+                <div class="example-grid">
+                    <div class="example-card">
+                        <h4>❌ HTTP (Tidak Aman)</h4>
+                        <p>Data dikirim dalam bentuk plaintext yang dapat dibaca siapa saja.</p>
+                        <div class="code-example" style="margin-top: 10px;">
+                            <p>Username: admin</p>
+                            <p>Password: password123</p>
+                        </div>
+                        <p style="margin-top: 10px; color: #ff4444;">⚠ Bisa di-intercept oleh attacker!</p>
+                    </div>
+
+                    <div class="example-card">
+                        <h4>✅ HTTPS (Aman)</h4>
+                        <p>Data dienkripsi menggunakan SSL/TLS sebelum dikirim.</p>
+                        <div class="code-example" style="margin-top: 10px;">
+                            <p>8h$k2m@9xP...</p>
+                            <p>mK9#qL5@2n...</p>
+                        </div>
+                        <p style="margin-top: 10px; color: #00ff88;">✅ Aman dari intersepsi!</p>
+                    </div>
+                </div>
+
+                <h3>4. Contoh Serangan Phishing</h3>
+                <div class="code-example">
+                    <p><strong>Email Phishing:</strong></p>
+                    <p style="margin-top: 10px;">From: security@bankk-indonesia.com ⚠ (perhatikan typo)</p>
+                    <p>Subject: URGENT! Verifikasi Akun Anda</p>
+                    <br>
+                    <p>Dear Customer,</p>
+                    <p>Akun Anda akan diblokir dalam 24 jam. Klik link berikut untuk verifikasi:</p>
+                    <p style="color: #ff4444;">http://fake-bank-login.com/verify</p>
+                    <br>
+                    <p><strong>🚨 Tanda-tanda Phishing:</strong></p>
+                    <ul style="padding-left: 20px; margin-top: 10px;">
+                        <li>Domain mencurigakan (typo, bukan HTTPS)</li>
+                        <li>Urgency yang berlebihan</li>
+                        <li>Meminta informasi sensitif</li>
+                        <li>Grammar yang buruk</li>
+                    </ul>
+                </div>
+
+                <h3>5. Contoh Implementasi Firewall Rules</h3>
+                <div class="code-example">
+                    <p><strong>Allow HTTP/HTTPS traffic:</strong></p>
+                    <p>iptables -A INPUT -p tcp --dport 80 -j ACCEPT</p>
+                    <p>iptables -A INPUT -p tcp --dport 443 -j ACCEPT</p>
+                    <br>
+                    <p><strong>Block specific IP:</strong></p>
+                    <p>iptables -A INPUT -s 192.168.1.100 -j DROP</p>
+                    <br>
+                    <p><strong>Allow SSH only from specific network:</strong></p>
+                    <p>iptables -A INPUT -p tcp -s 10.0.0.0/24 --dport 22 -j ACCEPT</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simulator Enkripsi -->
+        <div id="simulator" class="section">
+            <div class="card">
+                <h2>🔧 Simulator Enkripsi</h2>
+                <p>Coba enkripsi dan dekripsi teks menggunakan Caesar Cipher dan Base64!</p>
+
+                <div class="simulator">
+                    <h3>Caesar Cipher</h3>
+                    <textarea id="caesarInput" placeholder="Masukkan teks yang ingin dienkripsi..." rows="4"></textarea>
+<div class="simulator">
+                    <h3>Caesar Cipher</h3>
+                    <textarea id="caesarInput" placeholder="Masukkan teks yang ingin dienkripsi..." rows="4"></textarea>
+                    <label for="caesarShift">Shift (1-25):</label>
+                    <input type="number" id="caesarShift" min="1" max="25" value="3">
+                    <div style="margin-top: 15px;">
+                        <button onclick="encryptCaesar()">🔒 Enkripsi</button>
+                        <button onclick="decryptCaesar()">🔓 Dekripsi</button>
+                    </div>
+                    <div id="caesarOutput" class="result" style="display: none;">
+                        <h4>Hasil:</h4>
+                        <p id="caesarResult"></p>
+                    </div>
+                </div>
+
+                <div class="simulator">
+                    <h3>Base64 Encoding</h3>
+                    <textarea id="base64Input" placeholder="Masukkan teks..." rows="4"></textarea>
+                    <div style="margin-top: 15px;">
+                        <button onclick="encodeBase64()">🔒 Encode</button>
+                        <button onclick="decodeBase64()">🔓 Decode</button>
+                    </div>
+                    <div id="base64Output" class="result" style="display: none;">
+                        <h4>Hasil:</h4>
+                        <p id="base64Result"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Password Checker -->
+        <div id="password" class="section">
+            <div class="card">
+                <h2>🔑 Password Strength Checker</h2>
+                <p>Cek kekuatan password Anda dan dapatkan saran untuk membuatnya lebih aman!</p>
+
+                <div class="simulator">
+                    <label for="passwordInput">Masukkan Password:</label>
+                    <input type="password" id="passwordInput" placeholder="Masukkan password..." oninput="checkPassword()">
+                    <button onclick="togglePassword()" style="margin-top: 10px;">👁 Tampilkan Password</button>
+
+                    <div id="passwordResult" style="display: none; margin-top: 20px;">
+                        <h3>Kekuatan Password:</h3>
+                        <div class="password-strength">
+                            <div id="strengthBar" class="password-strength-bar"></div>
+                        </div>
+                        <p id="strengthText" style="margin-top: 10px; font-size: 1.2em; font-weight: 600;"></p>
+
+                        <div style="margin-top: 20px;">
+                            <h4>Analisis:</h4>
+                            <p id="passwordLength"></p>
+                            <p id="passwordChars"></p>
+                            <p id="passwordNumbers"></p>
+                            <p id="passwordSpecial"></p>
+                            <p id="passwordScore"></p>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <h4>💡 Saran:</h4>
+                            <ul id="passwordSuggestions" style="padding-left: 20px;"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3>📋 Tips Membuat Password Kuat:</h3>
+                    <ul style="padding-left: 20px; margin-top: 15px;">
+                        <li>Gunakan minimal <span class="highlight">12 karakter</span></li>
+                        <li>Kombinasikan <span class="highlight">huruf besar dan kecil</span></li>
+                        <li>Tambahkan <span class="highlight">angka dan simbol</span></li>
+                        <li>Hindari informasi pribadi (nama, tanggal lahir)</li>
+                        <li>Jangan gunakan kata yang ada di kamus</li>
+                        <li>Gunakan <span class="highlight">password manager</span> untuk menyimpan</li>
+                        <li>Aktifkan <span class="highlight">Two-Factor Authentication (2FA)</span></li>
+                        <li>Ganti password secara berkala</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Glossary -->
+        <div id="glossary" class="section">
+            <div class="card">
+                <h2>📖 Glossary Keamanan Siber</h2>
+                <p>Kumpulan istilah penting dalam dunia cyber security:</p>
+
+                <div class="glossary-grid">
+                    <div class="glossary-item">
+                        <div class="glossary-term">Malware</div>
+                        <p>Software berbahaya yang dirancang untuk merusak atau mengeksploitasi sistem komputer.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Phishing</div>
+                        <p>Teknik penipuan untuk mencuri informasi sensitif dengan menyamar sebagai entitas terpercaya.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Firewall</div>
+                        <p>Sistem keamanan yang mengontrol lalu lintas jaringan berdasarkan aturan keamanan yang ditentukan.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">VPN</div>
+                        <p>Virtual Private Network - teknologi untuk membuat koneksi aman dan terenkripsi melalui internet.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">DDoS</div>
+                        <p>Distributed Denial of Service - serangan yang membanjiri server dengan traffic untuk membuatnya tidak tersedia.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">SSL/TLS</div>
+                        <p>Protokol keamanan untuk mengenkripsi komunikasi antara browser dan server web.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Two-Factor Authentication</div>
+                        <p>Metode keamanan yang memerlukan dua bentuk verifikasi identitas berbeda.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Penetration Testing</div>
+                        <p>Pengujian keamanan sistem dengan mensimulasikan serangan untuk menemukan kerentanan.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Social Engineering</div>
+                        <p>Manipulasi psikologis untuk mendapatkan informasi rahasia atau akses sistem.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Zero-Day</div>
+                        <p>Kerentanan keamanan yang belum diketahui vendor dan belum ada patch-nya.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Ransomware</div>
+                        <p>Jenis malware yang mengenkripsi data korban dan meminta tebusan untuk dekripsi.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Backdoor</div>
+                        <p>Metode untuk melewati autentikasi normal dan mendapatkan akses ke sistem.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Botnet</div>
+                        <p>Jaringan komputer yang terinfeksi dan dikendalikan oleh attacker untuk serangan.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">Cryptography</div>
+                        <p>Ilmu tentang teknik komunikasi aman untuk melindungi informasi dari pihak ketiga.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">IDS/IPS</div>
+                        <p>Intrusion Detection/Prevention System - sistem untuk mendeteksi dan mencegah intrusi jaringan.</p>
+                    </div>
+
+                    <div class="glossary-item">
+                        <div class="glossary-term">APT</div>
+                        <p>Advanced Persistent Threat - serangan canggih dan berkelanjutan terhadap target spesifik.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz -->
+        <div id="quiz" class="section">
+            <div class="card">
+                <h2>✅ Quiz Keamanan Siber</h2>
+                <p>Uji pemahaman Anda tentang keamanan siber dengan 10 pertanyaan berikut:</p>
+
+                <div id="quizContainer"></div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="submitQuiz()" id="submitBtn" style="font-size: 1.2em; padding: 15px 40px;">📝 Submit Quiz</button>
+                    <button onclick="resetQuiz()" style="font-size: 1.2em; padding: 15px 40px;">🔄 Reset</button>
+                </div>
+
+                <div id="quizResult" style="display: none; margin-top: 30px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>🔐 Media Pembelajaran Keamanan Siber</p>
+        <p>Dibuat oleh: <strong>Yoel Ferdinand Stam</strong> | Kelas XIIC | Absen 26</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">© 2024 - Untuk Tujuan Pembelajaran</p>
+    </footer>
+
+    <script>
+        // Navigation
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            const buttons = document.querySelectorAll('nav button');
+            
+            sections.forEach(section => section.classList.remove('active'));
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Caesar Cipher Functions
+        function caesarCipher(text, shift, encrypt = true) {
+            if (!encrypt) shift = 26 - shift;
+            return text.toUpperCase().replace(/[A-Z]/g, char => {
+                return String.fromCharCode(((char.charCodeAt(0) - 65 + shift) % 26) + 65);
+            });
+        }
+
+        function encryptCaesar() {
+            const input = document.getElementById('caesarInput').value;
+            const shift = parseInt(document.getElementById('caesarShift').value);
+            const result = caesarCipher(input, shift, true);
+            document.getElementById('caesarResult').textContent = result;
+            document.getElementById('caesarOutput').style.display = 'block';
+        }
+
+        function decryptCaesar() {
+            const input = document.getElementById('caesarInput').value;
+            const shift = parseInt(document.getElementById('caesarShift').value);
+            const result = caesarCipher(input, shift, false);
+            document.getElementById('caesarResult').textContent = result;
+            document.getElementById('caesarOutput').style.display = 'block';
+        }
+
+        // Base64 Functions
+        function encodeBase64() {
+            const input = document.getElementById('base64Input').value;
+            const result = btoa(input);
+            document.getElementById('base64Result').textContent = result;
+            document.getElementById('base64Output').style.display = 'block';
+        }
+
+        function decodeBase64() {
+            const input = document.getElementById('base64Input').value;
+            try {
+                const result = atob(input);
+                document.getElementById('base64Result').textContent = result;
+                document.getElementById('base64Output').style.display = 'block';
+            } catch (e) {
+                document.getElementById('base64Result').textContent = 'Error: Input tidak valid!';
+                document.getElementById('base64Output').style.display = 'block';
+            }
+        }
+
+        // Password Checker
+        function togglePassword() {
+            const input = document.getElementById('passwordInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password.length === 0) {
+                document.getElementById('passwordResult').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('passwordResult').style.display = 'block';
+
+            let score = 0;
+            const suggestions = [];
+
+            // Length check
+            const length = password.length;
+            document.getElementById('passwordLength').innerHTML = `Panjang: <span class="highlight">${length} karakter</span>`;
+            if (length >= 12) score += 2;
+            else if (length >= 8) score += 1;
+            else suggestions.push('Gunakan minimal 12 karakter');
+
+            // Uppercase check
+            const hasUpper = /[A-Z]/.test(password);
+            document.getElementById('passwordChars').innerHTML = `Huruf Besar: ${hasUpper ? '✅' : '❌'}`;
+            if (hasUpper) score += 1;
+            else suggestions.push('Tambahkan huruf besar');
+
+            // Lowercase check
+            const hasLower = /[a-z]/.test(password);
+            
+            // Numbers check
+            const hasNumber = /[0-9]/.test(password);
+            document.getElementById('passwordNumbers').innerHTML = `Angka: ${hasNumber ? '✅' : '❌'}`;
+            if (hasNumber) score += 1;
+            else suggestions.push('Tambahkan angka');
+
+            // Special characters check
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            document.getElementById('passwordSpecial').innerHTML = `Karakter Khusus: ${hasSpecial ? '✅' : '❌'}`;
+            if (hasSpecial) score += 1;
+            else suggestions.push('Tambahkan karakter khusus (!@#$%^&*)');
+
+            // Diversity check
+            const uniqueChars = new Set(password).size;
+            if (uniqueChars >= password.length * 0.7) score += 1;
+
+            // Update strength bar
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            if (score <= 2) {
+                strengthBar.className = 'password-strength-bar strength-weak';
+                strengthText.textContent = '❌ Lemah';
+                strengthText.style.color = '#ff4444';
+            } else if (score <= 4) {
+                strengthBar.className = 'password-strength-bar strength-medium';
+                strengthText.textContent = '⚠ Sedang';
+                strengthText.style.color = '#ffaa00';
+            } else {
+                strengthBar.className = 'password-strength-bar strength-strong';
+                strengthText.textContent = '✅ Kuat';
+                strengthText.style.color = '#00ff88';
+            }
+
+            document.getElementById('passwordScore').innerHTML = `Skor: <span class="highlight">${score}/6</span>`;
+
+            // Display suggestions
+            const suggestionsList = document.getElementById('passwordSuggestions');
+            suggestionsList.innerHTML = '';
+            if (suggestions.length > 0) {
+                suggestions.forEach(suggestion => {
+                    const li = document.createElement('li');
+                    li.textContent = suggestion;
+                    suggestionsList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = '✅ Password Anda sudah kuat!';
+                li.style.color = '#00ff88';
+                suggestionsList.appendChild(li);
+            }
+        }
+
+        // Quiz Data
+        const quizData = [
+            {
+                question: "Apa kepanjangan dari CIA Triad dalam keamanan siber?",
+                options: [
+                    "Central Intelligence Agency",
+                    "Confidentiality, Integrity, Availability",
+                    "Computer Information Access",
+                    "Cyber Intelligence Analysis"
+                ],
+                correct: 1
+            },
+            {
+                question: "Manakah yang merupakan contoh enkripsi asimetris?",
+                options: [
+                    "AES",
+                    "DES",
+                    "RSA",
+                    "3DES"
+                ],
+                correct: 2
+            },
+            {
+                question: "Apa fungsi utama dari firewall?",
+                options: [
+                    "Mengenkripsi data",
+                    "Mengontrol lalu lintas jaringan",
+                    "Membuat password",
+                    "Menghapus virus"
+                ],
+                correct: 1
+            },
+            {
+                question: "Teknik penipuan untuk mencuri informasi sensitif disebut?",
+                options: [
+                    "Hacking",
+                    "Cracking",
+                    "Phishing",
+                    "Spoofing"
+                ],
+                correct: 2
+            },
+            {
+                question: "Protokol apa yang digunakan untuk koneksi web yang aman?",
+                options: [
+                    "HTTP",
+                    "HTTPS",
+                    "FTP",
+                    "SMTP"
+                ],
+                correct: 1
+            },
+            {
+                question: "Malware yang mengenkripsi data dan meminta tebusan disebut?",
+                options: [
+                    "Virus",
+                    "Worm",
+                    "Trojan",
+                    "Ransomware"
+                ],
+                correct: 3
+            },
+            {
+                question: "Apa kepanjangan dari VPN?",
+                options: [
+                    "Virtual Private Network",
+                    "Very Protected Network",
+                    "Verified Public Network",
+                    "Virtual Public Node"
+                ],
+                correct: 0
+            },
+            {
+                question: "Serangan yang membanjiri server dengan traffic disebut?",
+                options: [
+                    "SQL Injection",
+                    "DDoS Attack",
+                    "XSS Attack",
+                    "CSRF Attack"
+                ],
+                correct: 1
+            },
+            {
+                question: "Prinsip CIA mana yang memastikan data tidak dimodifikasi tanpa izin?",
+                options: [
+                    "Confidentiality",
+                    "Integrity",
+                    "Availability",
+                    "Authentication"
+                ],
+                correct: 1
+            },
+            {
+                question: "Metode autentikasi dengan dua tahap verifikasi disebut?",
+                options: [
+                    "Single Sign-On",
+                    "Multi-Factor Authentication",
+                    "Biometric Authentication",
+                    "Token Authentication"
+                ],
+                correct: 1
+            }
+        ];
+
+        // Initialize Quiz
+        function initQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.innerHTML = `
+                    <h3>Pertanyaan ${index + 1}</h3>
+                    <p>${q.question}</p>
+                    <div class="quiz-options">
+                        ${q.options.map((option, i) => `
+                            <div class="quiz-option" onclick="selectOption(${index}, ${i})">
+                                <input type="radio" name="q${index}" value="${i}" id="q${index}o${i}">
+                                <label for="q${index}o${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            const options = document.querySelectorAll(`.quiz-question:nth-child(${questionIndex + 1}) .quiz-option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            document.getElementById(`q${questionIndex}o${optionIndex}`).checked = true;
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            const answers = [];
+
+            quizData.forEach((q, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                const options = document.querySelectorAll(`.quiz-question:nth-child(${index + 1}) .quiz-option`);
+                
+                if (selected) {
+                    const selectedValue = parseInt(selected.value);
+                    answers.push(selectedValue);
+                    
+                    if (selectedValue === q.correct) {
+                        score++;
+                        options[selectedValue].classList.add('correct');
+                    } else {
+                        options[selectedValue].classList.add('incorrect');
+                        options[q.correct].classList.add('correct');
+                    }
+                } else {
+                    answers.push(null);
+                    options[q.correct].classList.add('correct');
+                }
+            });
+
+            const percentage = (score / quizData.length) * 100;
+            const resultDiv = document.getElementById('quizResult');
+            
+            let grade, message, color;
+            if (percentage >= 80) {
+                grade = 'A';
+                message = 'Luar biasa! Anda memiliki pemahaman yang sangat baik tentang keamanan siber!';
+                color = '#00ff88';
+            } else if (percentage >= 60) {
+                grade = 'B';
+                message = 'Bagus! Anda memiliki pemahaman yang baik, tapi masih ada ruang untuk improvement.';
+                color = '#00ff88';
+            } else if (percentage >= 40) {
+                grade = 'C';
+                message = 'Cukup baik, tapi Anda perlu belajar lebih banyak tentang keamanan siber.';
+                color = '#ffaa00';
+            } else {
+                grade = 'D';
+                message = 'Perlu belajar lebih giat lagi. Coba review materi dan ulangi quiz!';
+                color = '#ff4444';
+            }
+
+            resultDiv.innerHTML = `
+                <div class="result">
+                    <h2 style="text-align: center;">Hasil Quiz</h2>
+                    <div style="text-align: center; font-size: 3em; color: ${color}; margin: 20px 0;">
+                        ${grade}
+                    </div>
+                    <p style="text-align: center; font-size: 1.5em; margin: 20px 0;">
+                        Skor: <span class="highlight">${score}/${quizData.length}</span> (${percentage.toFixed(0)}%)
+                    </p>
+                    <p style="text-align: center; font-size: 1.1em;">
+                        ${message}
+                    </p>
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+
+            document.getElementById('submitBtn').disabled = true;
+            window.scrollTo({ top: resultDiv.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            document.getElementById('quizResult').style.display = 'none';
+            document.getElementById('submitBtn').disabled = false;
+            
+            const allOptions = document.querySelectorAll('.quiz-option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            const allInputs = document.querySelectorAll('input[type="radio"]');
+            allInputs.forEach(input => input.checked = false);
+            
+            window.scrollTo({ top: document.getElementById('quiz').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        // Initialize quiz when page loads
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+</html>
